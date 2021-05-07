@@ -1,0 +1,19 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"folder_exclude_patterns": ["public/build", "public/bundles", "var"],
+			"follow_symlinks": true
+		}
+	],
+	"settings":
+	[
+		{
+			"default_encoding": "UTF-8",
+			"default_line_ending": "unix",
+			"tab_size": 4,
+			"translate_tabs_to_spaces": true
+		}
+	]
+}
