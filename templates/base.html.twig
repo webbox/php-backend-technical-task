@@ -1,19 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html
+    lang="{{ app.request.locale|split('_')[0] }}"
+    data-base-url="{{ app.request.getSchemeAndHttpHost() }}"
+    data-translations-url="{{ url('bazinga_jstranslation_js', {'_format': 'json'}) }}"
+    {% if google_recaptcha_site_key is defined and google_recaptcha_site_key is not empty %}data-recaptcha-key="{{ google_recaptcha_site_key }}"{% endif %}
+>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+        <title>{% block title %}{% trans %}phrase.untitled_page{% endtrans %}{% endblock %} - {% trans %}app.title{% endtrans %}</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('style') }}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+
+    <body class="{% block bodyClass %}{% endblock %}">
+        <div id="app" class="{% block appClass %}{% endblock %}">
+            <div aria-live="polite" aria-atomic="true" class="position-relative">
+                <div id="toasts" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 5">
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="toast toast-{{ label }}" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+                                <div class="toast-header">
+                                    <i class="fa-fw fa me-2"></i>
+                                    <strong class="me-auto">{{ ('word.' ~ label)|trans }}</strong>
+                                    <small>{% trans %}phrase.just_now{% endtrans %}</small>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{% trans %}word.close {% endtrans %}"></button>
+                                </div>
+                                <div class="toast-body">
+                                    {{ message }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <header class="sticky-top {% block headerClass %}{% endblock %}">
+                <div class="container-fluid bg-primary">
+                    <div class="row">
+                        <div class="col-12 d-flex align-items-center justify-content-center">
+                            <h1 class="flex-grow-1 text-center">
+                                {% trans %}app.title{% endtrans %}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="nav navbar-main navbar-expand-md bg-secondary text-light">
+                    <div class="container">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainContent" aria-controls="navbarMainContent" aria-expanded="false" aria-label="{% trans %}phrase.toggle_navigation{% endtrans %}">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarMainContent">
+                            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('home_index') }}">
+                                        <i class="sr-none fa fa-fw fas fa-home" data-toggle="tooltip" title="{% trans %}word.home{% endtrans %}"></i>
+                                        <span>{% trans %}word.home{% endtrans %}</span>
+                                    </a>
+                                </li>
+                                {% if app.user %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('user_account') }}">
+                                            <i class="sr-none fa fa-fw fas fa-user" data-toggle="tooltip" title="{% trans %}word.account{% endtrans %}"></i>
+                                            <span>{% trans %}word.account{% endtrans %}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('user_logout') }}">
+                                            <i class="sr-none fa fa-fw fas fa-sign-out-alt" data-toggle="tooltip" title="{% trans %}phrase.sign_out{% endtrans %}"></i>
+                                            <span>{% trans %}phrase.sign_out{% endtrans %}</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('user_login') }}">
+                                            <i class="sr-none fa fa-fw fas fa-sign-in-alt" data-toggle="tooltip" title="{% trans %}phrase.sign_in{% endtrans %}"></i>
+                                            <span>{% trans %}phrase.sign_in{% endtrans %}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('user_account_register') }}">
+                                            <i class="sr-none fa fa-fw fas fa-check" data-toggle="tooltip" title="{% trans %}word.register{% endtrans %}"></i>
+                                            <span>{% trans %}word.register{% endtrans %}</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+            <main class="{% block mainClass %}{% endblock %}">
+                {% block body %}{% endblock %}
+            </main>
+        </div>
+
+        {% if google_recaptcha_site_key is defined and google_recaptcha_site_key is not empty %}
+            <script type="text/javascript">
+let script;
+script          = document.createElement("script");
+script.src      = "https://www.google.com/recaptcha/api.js?render={{ google_recaptcha_site_key }}";
+script.async    = true;
+script.defer    = true;
+
+script.addEventListener("load", function (event) {
+    grecaptcha.ready(function() {
+        grecaptcha.execute("{{ google_recaptcha_site_key }}", {
+            action: "homepage",
+        }).then(function (token) {
+            document.querySelectorAll('[name="captcha"]').forEach(function (element, i) {
+                element.nodeValue = token;
+            });
+        });
+    });
+});
+
+document.body.appendChild(script);
+            </script>
+        {% endif %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>
