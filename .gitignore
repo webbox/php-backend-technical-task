@@ -1,3 +1,4 @@
+/project.sublime-workspace
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -15,4 +16,9 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
-/project.sublime-workspace
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
