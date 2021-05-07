@@ -93,6 +93,10 @@
         <source>You are not logged in.</source>
         <target>You are not logged in.</target>
       </trans-unit>
+      <trans-unit id="yPHGEV3" resname="Bad credentials.">
+        <source>Bad credentials.</source>
+        <target>Bad credentials.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
