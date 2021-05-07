@@ -111,7 +111,7 @@ abstract class BaseEntity
      */
     public function __construct(?\App\Entity\User $creator = null, ?\App\Entity\User $owner = null)
     {
-        $this->id       = Uuid::v6();
+        // $this->id       = Uuid::v6();
         $this->creator  = $creator;
         $this->owner    = $owner;
 
