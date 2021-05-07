@@ -1,7 +1,28 @@
+<IfModule mod_pagespeed.c>
+    ModPagespeed on
+</IfModule>
+
+<IfModule mod_alias.c>
+    # Stop some web hosting management URLs
+    RedirectMatch   gone    "/cpanel[\/]?$"
+    RedirectMatch   gone    "/whm[\/]?$"
+
+    # Stop some silly URLs that will never work
+    RedirectMatch   gone    "/Administrator[\/]?$"
+    RedirectMatch   gone    "/phpunit.xsd[\/]?$"
+
+    # Stop the Symfony log getting flooded with WordPress request URLs
+    RedirectMatch   gone    "/wp-admin[\/]?(.*)"
+    RedirectMatch   gone    "/wp-content[\/]?(.*)"
+    Redirect        gone    "/wp-login"
+    Redirect        gone    "/wp-login.php"
+</IfModule>
+
 DirectoryIndex index.php
+Options FollowSymlinks
 
 <IfModule mod_negotiation.c>
-    Options -MultiViews
+    Options -MultiViews -Indexes
 </IfModule>
 
 <IfModule mod_rewrite.c>
