@@ -32,5 +32,7 @@ security:
 
     access_control:
         - { path: "^/([a-z]{2}\/)?admin",                   requires_channel: https,    roles: [IS_AUTHENTICATED_FULLY,         ROLE_ADMIN  ] }
+        - { path: "^/([a-z]{2}\/)?account/login",           requires_channel: https,    roles: [IS_AUTHENTICATED_ANONYMOUSLY                ] }
+        - { path: "^/([a-z]{2}\/)?account/register",        requires_channel: https,    roles: [IS_AUTHENTICATED_ANONYMOUSLY                ] }
         - { path: "^/([a-z]{2}\/)?account",                 requires_channel: https,    roles: [IS_AUTHENTICATED_FULLY                      ] }
-        - { path: "^/([a-z]{2}\/)?",                        requires_channel: https,    roles: [IS_AUTHENTICATED_ANONYMOUSLY                ] }
+        - { path: "^/([a-z]{2}\/)?",                        requires_channel: https,    roles: [                                            ] }

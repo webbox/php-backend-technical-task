@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{% trans %}word.account{% endtrans %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                {% trans with {firstName: app.user.firstName} %}sentence.account_dashboard{% endtrans %}
+
+                <a class="btn btn-info" href="{{ path('user_account_edit') }}">{% trans %}phrase.edit_account{% endtrans %}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

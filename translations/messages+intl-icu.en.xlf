@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="Zbssjtk" resname="sentence.account_register_success">
+        <source>sentence.account_register_success</source>
+        <target>Thank you for registering!</target>
+      </trans-unit>
+      <trans-unit id="X1u8OWt" resname="sentence.account_edit_success">
+        <source>sentence.account_edit_success</source>
+        <target>Account updated successfully.</target>
+      </trans-unit>
+      <trans-unit id="rujVJ3G" resname="app.title">
+        <source>app.title</source>
+        <target>WebBox backend PHP technical task</target>
+      </trans-unit>
+      <trans-unit id="apt482N" resname="word.registration">
+        <source>word.registration</source>
+        <target>Registration</target>
+      </trans-unit>
+      <trans-unit id="PWtJhDO" resname="word.hello">
+        <source>word.hello</source>
+        <target>Hello</target>
+      </trans-unit>
+      <trans-unit id="UUatFbZ" resname="word.login">
+        <source>word.login</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="R7QuEIU" resname="word.account">
+        <source>word.account</source>
+        <target>Account</target>
+      </trans-unit>
+      <trans-unit id="SLTCely" resname="word.home">
+        <source>word.home</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="KOAyk4." resname="phrase.just_now">
+        <source>phrase.just_now</source>
+        <target>Just now</target>
+      </trans-unit>
+      <trans-unit id="EmA6qjC" resname="word.close">
+        <source>word.close</source>
+        <target>Close</target>
+      </trans-unit>
+      <trans-unit id="W0jHj29" resname="phrase.toggle_navigation">
+        <source>phrase.toggle_navigation</source>
+        <target>Toggle navigation</target>
+      </trans-unit>
+      <trans-unit id="tUQ9CH8" resname="phrase.sign_out">
+        <source>phrase.sign_out</source>
+        <target>Sign out</target>
+      </trans-unit>
+      <trans-unit id="UOYU4Mn" resname="phrase.sign_in">
+        <source>phrase.sign_in</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="bAY.UG2" resname="word.register">
+        <source>word.register</source>
+        <target>Register</target>
+      </trans-unit>
+      <trans-unit id="WviyTM4" resname="phrase.untitled_page">
+        <source>phrase.untitled_page</source>
+        <target>Untitled page</target>
+      </trans-unit>
+      <trans-unit id="FGkQsOh" resname="sentence.registration">
+        <source>sentence.registration</source>
+        <target>Please complete the registration form.</target>
+      </trans-unit>
+      <trans-unit id="MYi.j5X" resname="sentence.account_edit">
+        <source>sentence.account_edit</source>
+        <target>Editing your account.</target>
+      </trans-unit>
+      <trans-unit id="onrRjTc" resname="sentence.account_dashboard">
+        <source>sentence.account_dashboard</source>
+        <target>Hi {firstName}, welcome to your dashboard.</target>
+      </trans-unit>
+      <trans-unit id="S2fI6Qp" resname="phrase.edit_account">
+        <source>phrase.edit_account</source>
+        <target>Edit account</target>
+      </trans-unit>
+      <trans-unit id="DaYEifz" resname="word.username">
+        <source>word.username</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="HqGJB3l" resname="phrase.first_name">
+        <source>phrase.first_name</source>
+        <target>First name</target>
+      </trans-unit>
+      <trans-unit id="4euChnM" resname="phrase.last_name">
+        <source>phrase.last_name</source>
+        <target>Last name</target>
+      </trans-unit>
+      <trans-unit id="LNWdZF." resname="phrase.display_name">
+        <source>phrase.display_name</source>
+        <target>Display name</target>
+      </trans-unit>
+      <trans-unit id="44Fp98t" resname="phrase.email_address">
+        <source>phrase.email_address</source>
+        <target>Email address</target>
+      </trans-unit>
+      <trans-unit id="Codomgf" resname="word.password">
+        <source>word.password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="xPeqeZb" resname="phrase.change_password">
+        <source>phrase.change_password</source>
+        <target>Change password</target>
+      </trans-unit>
+      <trans-unit id="s6sp7gL" resname="phrase.new_password">
+        <source>phrase.new_password</source>
+        <target>New password</target>
+      </trans-unit>
+      <trans-unit id="y89KqTa" resname="phrase.confirm_password">
+        <source>phrase.confirm_password</source>
+        <target>Confirm password</target>
+      </trans-unit>
+      <trans-unit id="qPldmfE" resname="phrase.confirm_new_password">
+        <source>phrase.confirm_new_password</source>
+        <target>Confirm new password</target>
+      </trans-unit>
+      <trans-unit id="1snFVgA" resname="word.save">
+        <source>word.save</source>
+        <target>Save</target>
+      </trans-unit>
+      <trans-unit id="OEhHVlT" resname="sentence.password_encoding_failed">
+        <source>sentence.password_encoding_failed</source>
+        <target>There was a problem encoding your password for secure storage. Please try again.</target>
+      </trans-unit>
+      <trans-unit id="KCS8Qbw" resname="phrase.username_or_email_address">
+        <source>phrase.username_or_email_address</source>
+        <target>Username or email address</target>
+      </trans-unit>
+      <trans-unit id="ddzdhpX" resname="phrase.remember_me">
+        <source>phrase.remember_me</source>
+        <target>Remember me</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
