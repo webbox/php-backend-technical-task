@@ -1,0 +1,179 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Text
+ * -----------------------------------------------------------------------------
+ */
+
+a
+{
+
+    color: $schemeTextLink;
+
+    &:active
+    {
+        color: $schemeTextLinkActive;
+    }
+
+    &:focus
+    {
+        color: $schemeTextLinkFocus;
+    }
+
+    &:hover
+    {
+        color: $schemeTextLinkHover;
+    }
+
+} // a
+
+a, a:active, a:focus, a:hover
+{
+    text-decoration: none;
+}
+
+big
+{
+    font-size: $fontSize20;
+}
+
+blockquote
+{
+
+    border-left: 0.2rem solid $schemePrimary;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0 0.5rem 1rem;
+
+    >blockquote
+    {
+        border-left-color: $schemePrimaryLight;
+
+        >blockquote
+        {
+            border-left-color: $schemePrimaryLighter;
+
+            blockquote
+            {
+                border-left-color: $schemePrimaryLightest;
+
+            } // blockquote
+
+        } // >blockquote
+
+    } // >blockquote
+
+} // blockquote
+
+del
+{
+    text-decoration: line-through;
+}
+
+em, i
+{
+    font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+
+}
+
+h1
+{
+    font-size: $fontSize26;
+}
+
+h2
+{
+    font-size: $fontSize24;
+}
+
+h3
+{
+    font-size: $fontSize22;
+}
+
+h4
+{
+    font-size: $fontSize20;
+}
+
+h5
+{
+    font-size: $fontSize18;
+}
+
+h6
+{
+    font-size: $fontSize16;
+}
+
+mark
+{
+    background-color: $schemeTextHighlight;
+}
+
+.mark-text
+{
+    background-color: transparent;
+    color: $schemeTextHighlight;
+    font-weight: bold;
+}
+
+p
+{
+
+}
+
+pre, tt
+{
+    font-family: $fontFamilyMonospace;
+}
+
+pre
+{
+
+    &.pre-code
+    {
+
+        background: $schemePrimaryDarker;
+        border: 0.1rem dotted $schemePrimaryDarkest;
+        color: $schemeTextInverse;
+        padding: 0.5rem;
+
+    } // &.pre-code
+
+} // pre
+
+small
+{
+    font-size: $fontSize12;
+}
+
+strong, b
+{
+    font-weight: 700;
+
+    &.semi {
+        font-weight: 500;
+    }
+
+    &.very {
+        font-weight: 900;
+    }
+}
+
+sub
+{
+
+}
+
+sup
+{
+
+}
+
+tt
+{
+
+}

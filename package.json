@@ -1,0 +1,43 @@
+{
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.3",
+        "@fortawesome/free-brands-svg-icons": "^5.15.3",
+        "@fortawesome/free-regular-svg-icons": "^5.15.3",
+        "@fortawesome/free-solid-svg-icons": "^5.15.3",
+        "@popperjs/core": "^2.9.0",
+        "@symfony/stimulus-bridge": "^2.0.0",
+        "@symfony/webpack-encore": "^1.0.0",
+        "@types/bazinga-translator": "^3.0.0",
+        "@types/bootstrap": "^5.0.12",
+        "@types/sprintf-js": "^1.1.2",
+        "bazinga-translator": "^4.0.1",
+        "bootstrap": "^5.0.0-beta2",
+        "core-js": "^3.0.0",
+        "file-loader": "^6.2.0",
+        "fork-ts-checker-webpack-plugin": "^6.1.1",
+        "intl-messageformat": "^9.5.3",
+        "popper.js": "^1.16.1",
+        "sass": "^1.32.8",
+        "sass-loader": "^11.0.0",
+        "sprintf": "^0.1.5",
+        "stimulus": "^2.0.0",
+        "sweetalert2": "^10.15.5",
+        "ts-loader": "^8.0.17",
+        "typescript": "^4.2.3"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.16.1",
+        "@typescript-eslint/parser": "^4.16.1",
+        "eslint": "^7.21.0",
+        "regenerator-runtime": "^0.13.2",
+        "webpack-notifier": "^1.6.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    }
+}

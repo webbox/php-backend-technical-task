@@ -1,0 +1,35 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Global
+ * -----------------------------------------------------------------------------
+ */
+
+html, body
+{
+
+    color: $schemeText;
+
+    font-family: $fontFamilySansSerif;
+    font-size: $fontSize16;
+    font-style: normal;
+    font-weight: 400;
+
+    margin: 0;
+    padding: 0;
+
+} // html, body
+
+body
+{
+
+    background-color: $schemeBgBody;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+
+} // body
+
+.grecaptcha-badge[data-style="bottomleft"], .grecaptcha-badge[data-style="bottomright"] {
+    bottom: 24px !important;
+}

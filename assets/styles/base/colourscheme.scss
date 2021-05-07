@@ -1,0 +1,192 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Colour scheme
+ * -----------------------------------------------------------------------------
+ */
+
+                                                    // Saturation and luminance (0-240)
+
+// Primary
+$schemePrimaryLightest:                 #D5DBE6;    // 60, 208
+$schemePrimaryLighter:                  #A0AEC6;    // 60, 168
+$schemePrimaryLight:                    #6D81A3;    // 54, 128
+$schemePrimary:                         #486088;    // 74, 98
+$schemePrimaryDark:                     #2A436D;    // 106, 71
+$schemePrimaryDarker:                   #12294F;    // 151, 46
+$schemePrimaryDarkest:                  #091324;    // 151, 21
+
+// Secondary
+$schemeSecondaryLightest:               #DBD8E9;    // 64, 211
+$schemeSecondaryLighter:                #ACA5CB;    // 64, 173
+$schemeSecondaryLight:                  #7E74AA;    // 58, 135
+$schemeSecondary:                       #594D8E;    // 71, 103
+$schemeSecondaryDark:                   #3A2E72;    // 102, 75
+$schemeSecondaryDarker:                 #201553;    // 143, 49
+$schemeSecondaryDarkest:                #0F0A27;    // 143, 23
+
+// Tertiary
+$schemeTertiaryLightest:                #CEE1DF;    // 59, 203
+$schemeTertiaryLighter:                 #97C0BB;    // 59, 161
+$schemeTertiaryLight:                   #629A92;    // 53, 119
+$schemeTertiary:                        #3E8178;    // 84, 90
+$schemeTertiaryDark:                    #21675E;    // 124, 64
+$schemeTertiaryDarker:                  #0B4B42;    // 179, 40
+$schemeTertiaryDarkest:                 #07342E;    // 179, 28
+
+// Inverse / complimentary
+$schemeInverseLightest:                 #FFF8E1;    // 240, 226
+$schemeInverseLighter:                  #FFEBC8;    // 240, 214
+$schemeInverseLight:                    #F6D69D;    // 200, 190
+$schemeInverse:                         #CDA763;    // 123, 143
+$schemeInverseDark:                     #A57D35;    // 123, 103
+$schemeInverseDarker:                   #785311;    // 180, 64
+$schemeInverseDarkest:                  #53390B;    // 180, 25
+
+// Grey
+$schemeGreyLightest:                    #E7E7E7;    // 0, 218
+$schemeGreyLighter:                     #B2B2B2;    // 0, 168
+$schemeGreyLight:                       #888888;    // 0, 128
+$schemeGrey:                            #686868;    // 0, 98
+$schemeGreyDark:                        #4B4B4B;    // 0, 71
+$schemeGreyDarker:                      #303030;    // 0, 45
+$schemeGreyDarkest:                     #222222;    // 0, 32
+
+$schemeWhite:                           #F0F0F0;    // 0, 226
+$schemeBlack:                           #141414;    // 0, 19
+
+// Info
+$schemeInfoLightest:                    #B9CDEE;
+$schemeInfoLighter:                     #87ABE6;
+$schemeInfoLight:                       #5D8BD6;
+$schemeInfo:                            #3C72C7;
+$schemeInfoDark:                        #1D59B9;
+$schemeInfoDarker:                      #0C4092;
+$schemeInfoDarkest:                     #062D6B;
+
+// Success
+$schemeSuccessLightest:                 #AEF6CF;
+$schemeSuccessLighter:                  #7FE9B0;
+$schemeSuccessLight:                    #52DB92;
+$schemeSuccess:                         #30CF7A;
+$schemeSuccessDark:                     #0EC362;
+$schemeSuccessDarker:                   #009C48;
+$schemeSuccessDarkest:                  #006E43;
+
+// Warning
+$schemeWarningLightest:                 #FFDFBF;
+$schemeWarningLighter:                  #FFC38B;
+$schemeWarningLight:                    #FFAC60;
+$schemeWarning:                         #FF993B;
+$schemeWarningDark:                     #FF8412;
+$schemeWarningDarker:                   #DD6A00;
+$schemeWarningDarkest:                  #BF5F00;
+
+// Danger
+$schemeDangerLightest:                  #F6AFAF;
+$schemeDangerLighter:                   #E98080;
+$schemeDangerLight:                     #DB5252;
+$schemeDanger:                          #CF3030;
+$schemeDangerDark:                      #C30E0E;
+$schemeDangerDarker:                    #9C0000;
+$schemeDangerDarkest:                   #6E0000;
+
+// Text
+$schemeText:                            $schemeBlack;
+$schemeTextInverse:                     $schemeWhite;
+$schemeTextHighlight:                   $schemeInverse;
+$schemeTextLink:                        $schemeSecondaryDark;
+$schemeTextLinkActive:                  $schemeSecondary;
+$schemeTextLinkFocus:                   $schemeSecondaryLight;
+$schemeTextLinkHover:                   $schemeSecondary;
+
+.text-dark {
+    color: $schemeBlack !important;
+}
+
+.text-light {
+    color: $schemeWhite !important;
+}
+
+.text-primary {
+    color: $schemePrimary !important;
+}
+
+.text-secondary {
+    color: $schemeSecondary !important;
+}
+
+.text-tertiary {
+    color: $schemeTertiary !important;
+}
+
+.text-inverse {
+    color: $schemeInverse !important;
+}
+
+.text-info {
+    color: $schemeInfo !important;
+}
+
+.text-success {
+    color: $schemeSuccess !important;
+}
+
+.text-warning {
+    color: $schemeWarning !important;
+}
+
+.text-danger {
+    color: $schemeDanger !important;
+}
+
+.text-grey {
+    color: $schemeGrey !important;
+}
+
+// Backgrounds
+$schemeBgBody:                          #F7F7F7;
+$schemeBgCard:                          #D0E8E8;
+
+.bg-dark {
+    background-color: $schemeBlack !important;
+}
+
+.bg-light {
+    background-color: $schemeWhite !important;
+}
+
+.bg-primary {
+    background-color: $schemePrimary !important;
+}
+
+.bg-secondary {
+    background-color: $schemeSecondary !important;
+}
+
+.bg-tertiary {
+    background-color: $schemeTertiary !important;
+}
+
+.bg-inverse {
+    background-color: $schemeInverse !important;
+}
+
+.bg-info {
+    background-color: $schemeInfo !important;
+}
+
+.bg-success {
+    background-color: $schemeSuccess !important;
+}
+
+.bg-warning {
+    background-color: $schemeWarning !important;
+}
+
+.bg-danger {
+    background-color: $schemeDanger !important;
+}
+
+.bg-grey {
+    background-color: $schemeGrey !important;
+}
