@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -17,6 +18,8 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user")
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
  */
 class User extends BaseEntity implements \Serializable, UserInterface, EquatableInterface
 {
@@ -36,7 +39,7 @@ class User extends BaseEntity implements \Serializable, UserInterface, Equatable
     protected $username;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="password", type="string", length=128, unique=false, nullable=true)
      * @Assert\Type(type="string")
      * @Assert\Length(min=0, max=128)
@@ -44,7 +47,7 @@ class User extends BaseEntity implements \Serializable, UserInterface, Equatable
     protected $password;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="first_name", type="string", length=200, unique=false, nullable=true)
      * @Assert\Type(type="string")
      * @Assert\Length(min=1, max=200)
@@ -52,7 +55,7 @@ class User extends BaseEntity implements \Serializable, UserInterface, Equatable
     protected $firstName;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="last_name", type="string", length=200, unique=false, nullable=true)
      * @Assert\Type(type="string")
      * @Assert\Length(min=1, max=200)
@@ -60,7 +63,7 @@ class User extends BaseEntity implements \Serializable, UserInterface, Equatable
     protected $lastName;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="display_name", type="string", length=200, unique=false, nullable=true)
      * @Assert\Type(type="string")
      * @Assert\Length(min=1, max=200)
@@ -68,8 +71,8 @@ class User extends BaseEntity implements \Serializable, UserInterface, Equatable
     protected $displayName;
 
     /**
-     * @var string
-     * @ORM\Column(name="email", type="string", length=256, unique=false, nullable=true)
+     * @var string|null
+     * @ORM\Column(name="email", type="string", length=256, unique=true, nullable=true)
      * @Assert\Type(type="string")
      * @Assert\Length(min=3, max=256)
      * @Assert\Email()
@@ -77,9 +80,9 @@ class User extends BaseEntity implements \Serializable, UserInterface, Equatable
     protected $email;
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTimeImmutable|null
      * @ORM\Column(name="time_stamp_last_seen", type="datetime_immutable", unique=false, nullable=true)
-     * @Assert\DateTime()
+     * @Assert\Type({"null", "\DateTimeImmutable"})
      */
     protected $timeStampLastSeen;
 

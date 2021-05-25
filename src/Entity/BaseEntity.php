@@ -31,7 +31,6 @@ abstract class BaseEntity
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidV6Generator::class)
-     * @Assert\NotBlank()
      * @Assert\Uuid(strict=true)
      */
     protected $id;
@@ -40,56 +39,56 @@ abstract class BaseEntity
      * @var \DateTimeImmutable
      * @ORM\Column(name="time_stamp_created", type="datetime_immutable", unique=false, nullable=false)
      * @Assert\NotNull()
-     * @Assert\DateTime()
+     * @Assert\Type("\DateTimeInterface")
      */
     protected $timeStampCreated;
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTimeImmutable|null
      * @ORM\Column(name="time_stamp_modified", type="datetime_immutable", unique=false, nullable=true)
-     * @Assert\NotNull()
-     * @Assert\DateTime()
+     * @Assert\Type({"null", "\DateTimeImmutable"})
      */
     protected $timeStampModified;
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTimeImmutable|null
      * @ORM\Column(name="time_stamp_accessed", type="datetime_immutable", unique=false, nullable=true)
-     * @Assert\NotNull()
-     * @Assert\DateTime()
+     * @Assert\Type({"null", "\DateTimeImmutable"})
      */
     protected $timeStampAccessed;
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTimeImmutable|null
      * @ORM\Column(name="time_stamp_deleted", type="datetime_immutable", unique=false, nullable=true)
-     * @Assert\DateTime()
+     * @Assert\Type({"null", "\DateTimeImmutable"})
      */
     protected $timeStampDeleted;
 
     /**
-     * @var \App\Entity\User
+     * @var \App\Entity\User|null
      * @ORM\ManyToOne(targetEntity="\App\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(name="creator_user_id", referencedColumnName="id", unique=false, nullable=true, onDelete="SET NULL")
+     * @Assert\Type({"null", "\App\Entity\User"})
      */
     protected $creator;
 
     /**
-     * @var \App\Entity\User
+     * @var \App\Entity\User|null
      * @ORM\ManyToOne(targetEntity="\App\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(name="owner_user_id", referencedColumnName="id", unique=false, nullable=true, onDelete="SET NULL")
+     * @Assert\Type({"null", "\App\Entity\User"})
      */
     protected $owner;
 
     /**
-     * @var \App\Entity\User
+     * @var \App\Entity\User|null
      * @ORM\ManyToOne(targetEntity="\App\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(name="deleted_by_user_id", referencedColumnName="id", unique=false, nullable=true, onDelete="SET NULL")
      */
     protected $deleter;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="delete_comment", type="string", length=200, unique=false, nullable=true)
      * @Assert\Type(type="string")
      * @Assert\Length(max=200)
