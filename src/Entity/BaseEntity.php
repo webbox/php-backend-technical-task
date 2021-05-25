@@ -222,14 +222,18 @@ abstract class BaseEntity
 
     /**
      * Get a shorter representation of a UUID if possible.
-     * @param  string|Uuid $uuid           UUID string in full, or UUID instance
+     * @param  string|Uuid $uuid           UUID string in full, or UUID instance (PHP 8+ can enforce a union type)
      * @param  bool        $throwOnBadUuid Throw an exception if the UUID is invalid
      * @return string                      UUID string shortened if possible
      */
-    public static function s_getShortUUID(string|Uuid $uuid, bool $throwOnBadUuid = false): string
+    public static function s_getShortUUID($uuid, bool $throwOnBadUuid = false): string
     {
-        if ($uuid instanceof Uuid) {
+        if ($uuid instanceof Uuid || (is_scalar($uuid) && !is_string($uuid))) {
             $uuid = strval($uuid);
+        }
+
+        if (!is_string($uuid)) {
+            throw new \UnexpectedValueException("UUID is not a string.");
         }
 
         $uuidBits = [];
