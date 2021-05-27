@@ -120,16 +120,18 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            try {
-                $user->setPassword($passwordEncoder->encodePassword($user, $form->get("password")->getData()));
-            } catch (\Exception $e) {
-                $form->get("password")->addError(new FormError($translator->trans("sentence.password_encoding_failed")));
-                $logger->error("Account update failed.", [
-                    "ipAddress" => $request->getClientIp(),
-                    "user"      => $user->getUsername(),
-                    "field"     => "password",
-                    "reason"    => $e->getMessage(),
-                ]);
+            if (!empty($form->get("password")->getData())) {
+                try {
+                    $user->setPassword($passwordEncoder->encodePassword($user, $form->get("password")->getData()));
+                } catch (\Exception $e) {
+                    $form->get("password")->addError(new FormError($translator->trans("sentence.password_encoding_failed")));
+                    $logger->error("Account update failed.", [
+                        "ipAddress" => $request->getClientIp(),
+                        "user"      => $user->getUsername(),
+                        "field"     => "password",
+                        "reason"    => $e->getMessage(),
+                    ]);
+                }
             }
 
             if ($form->isValid()) {
