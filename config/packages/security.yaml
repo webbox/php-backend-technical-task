@@ -1,6 +1,9 @@
 security:
     enable_authenticator_manager: true
 
+    encoders:
+        App\Entity\User: bcrypt
+
     providers:
         users_in_memory: { memory: null }
 
@@ -17,6 +20,10 @@ security:
         main:
             lazy: true
             provider: local
+
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
 
             logout:
                 path: user_logout
