@@ -31,6 +31,7 @@ abstract class BaseEntity
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidV6Generator::class)
+     * @Assert\NotBlank(groups={"Intricate"})
      * @Assert\Uuid(strict=true)
      */
     protected $id;
@@ -38,7 +39,7 @@ abstract class BaseEntity
     /**
      * @var \DateTimeImmutable
      * @ORM\Column(name="time_stamp_created", type="datetime_immutable", unique=false, nullable=false)
-     * @Assert\NotNull()
+     * @Assert\NotNull(groups={"Intricate"})
      * @Assert\Type("\DateTimeInterface")
      */
     protected $timeStampCreated;
@@ -46,6 +47,7 @@ abstract class BaseEntity
     /**
      * @var \DateTimeImmutable|null
      * @ORM\Column(name="time_stamp_modified", type="datetime_immutable", unique=false, nullable=true)
+     * @Assert\NotNull(groups={"Intricate"})
      * @Assert\Type({"null", "\DateTimeImmutable"})
      */
     protected $timeStampModified;
@@ -53,6 +55,7 @@ abstract class BaseEntity
     /**
      * @var \DateTimeImmutable|null
      * @ORM\Column(name="time_stamp_accessed", type="datetime_immutable", unique=false, nullable=true)
+     * @Assert\NotNull(groups={"Intricate"})
      * @Assert\Type({"null", "\DateTimeImmutable"})
      */
     protected $timeStampAccessed;
