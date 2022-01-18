@@ -3,9 +3,9 @@
 namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityRepository;
-
 use Doctrine\Persistence\ManagerRegistry;
+
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
@@ -13,8 +13,14 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+
 use App\Service\FilterService;
 
+/**
+ * Base entity repository for abstraction.
+ * @template T
+ * @extends ServiceEntityRepository<T>
+ */
 abstract class BaseEntityRepository extends ServiceEntityRepository
 {
     /*
@@ -23,29 +29,19 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
     ----------------------------------------------------------------------------
      */
 
-    /**
-     * @const string Alias for this entity in repository queries. (Expected to be overridden in all repository classes.)
-     */
+    /** @const class-string|null Fully qualified class name for this entity. (Expected to be overridden in all repository classes.) */
+    public const ENTITY_FQCN = null;
+
+    /** @const string|null Alias for this entity in repository queries. (Expected to be overridden in all repository classes.) */
     public const ENTITY_ALIAS = null;
 
-    /**
-     * @const string Entity FQCN. (Expected to be overridden in all repository classes.)
-     */
-    public const ENTITY_CLASS = null;
-
-    /**
-     * @const int Do not include soft deleted entities.
-     */
+    /** @const int Do not include soft deleted entities. */
     public const INCLUDE_DELETED_NO = 0;
 
-    /**
-     * @const int Include soft deleted entities.
-     */
+    /** @const int Include soft deleted entities. */
     public const INCLUDE_DELETED_YES = 1;
 
-    /**
-     * @const int Exclusively include soft deleted entities. (Do not show non-deleted entities.)
-     */
+    /** @const int Exclusively include soft deleted entities. (Do not show non-deleted entities.) */
     public const INCLUDE_DELETED_EXCLUSIVE = 2;
 
 
@@ -58,19 +54,24 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
 
     /**
      * Constructor.
-     * @param  ManagerRegistry $registry Doctrine manager registry
+     * @param ManagerRegistry $registry Doctrine entity manager registry
      */
     public function __construct(ManagerRegistry $registry)
     {
-        if (null === static::ENTITY_ALIAS || empty($entityName = static::ENTITY_ALIAS)) {
-            throw new \UnexpectedValueException("Repository entity alias not defined.");
+        if (null === static::ENTITY_FQCN || !($entityFqcn = trim(static::ENTITY_FQCN))) {
+            throw new \DomainException("Repository entity class not defined.");
         }
 
-        if (null === static::ENTITY_CLASS || empty($entityClass = static::ENTITY_CLASS)) {
-            throw new \UnexpectedValueException("Repository entity FQCN not defined.");
+        if (null === static::ENTITY_ALIAS || !($entityAlias = trim(static::ENTITY_ALIAS))) {
+            throw new \DomainException("Repository entity alias not defined.");
         }
 
-        parent::__construct($registry, $entityClass);
+        if (!class_exists($entityFqcn)) {
+            throw new \DomainException("Repository entity class not found.");
+        }
+
+        /** @var class-string<T> $entityFqcn */
+        parent::__construct($registry, $entityFqcn);
     }
 
 
@@ -83,81 +84,69 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
 
     /**
      * Validate an array used to search entities.
-     * @param  array|null &$criteria Associative list of fields to order by as "field" => value
-     * @return bool                  True if valid, false if invalid
+     * @param  array<string, mixed>|null $criteria Associative list of fields to order by as "field" => value
+     * @return void
      */
-    protected function validateCriteria(array &$criteria = null): bool
+    protected function validateCriteria(?array $criteria = null): void
     {
         if (null === $criteria) {
-            return true;
+            return;
         }
 
         foreach ($criteria as $field => &$order) {
             if (!is_string($field)) {
                 throw new \InvalidArgumentException("Field must be a string.");
-                return false;
             }
 
             if (!($field = trim($field))) {
                 throw new \InvalidArgumentException("Field not specified.");
-                return false;
             }
         }
 
-        return true;
+        return;
     }
 
     /**
      * Validate an array used to order entities.
-     * @param  array|null &$orderBy Associative list of fields to order by as "field" => "ASC"|"DESC"
-     * @return bool                 True if valid, false if invalid
+     * @param  array<string, string>|null $orderBy Associative list of fields to order by as "field" => "ASC"|"DESC"
+     * @return void
      */
-    protected function validateOrderBy(array &$orderBy = null): bool
+    protected function validateOrderBy(array $orderBy = null): void
     {
         if (null === $orderBy) {
-            return true;
+            return;
         }
 
         foreach ($orderBy as $field => &$order) {
             if (!is_string($field)) {
                 throw new \InvalidArgumentException("Field must be a string.");
-                return false;
             }
 
             if (!($field = trim($field))) {
                 throw new \InvalidArgumentException("Field not specified.");
-                return false;
             }
 
             if (!is_string($order)) {
                 throw new \InvalidArgumentException("Order must be a string.");
-                return false;
             }
 
             if (!($order = strtoupper(trim($order)))) {
                 throw new \InvalidArgumentException("Order not specified.");
-                return false;
             }
 
-            switch ($order) {
-                case "ASC":
-                case "DESC":
-                    break;
-
-                default:
-                    throw new \InvalidArgumentException(sprintf("Order \"%s\" invalid.", $order));
-                    return false;
+            if (!in_array($order, ["ASC", "DESC"])) {
+                throw new \InvalidArgumentException(sprintf("Order \"%s\" invalid.", $order));
             }
         }
 
-        return true;
+        return;
     }
 
     /**
      * Handle include soft-deleted entities option for a query builder.
      * @param  QueryBuilder $qb             Query builder
      * @param  int          $includeDeleted Include soft-deleted entities
-     * @return self
+     * @return self<T>
      */
     protected function handleIncludeDeleted(QueryBuilder $qb, int $includeDeleted): self
     {
@@ -191,20 +180,18 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
 
     /**
      * Find all entities in the repository.
-     * @param  array|null $orderBy        Associative list of fields to order by as "field" => "ASC"|"DESC"
-     * @param  int|null   $includeDeleted Include soft-deleted entities
-     * @return array                      Matched entities
+     * @param  array<string, string>|null $orderBy        Associative list of fields to order by as "field" => "ASC"|"DESC"
+     * @param  int                        $includeDeleted Include soft-deleted entities
+     * @return array<object>                              Matched entities
      */
-    public function findAll(?array $orderBy = [], ?int $includeDeleted = self::INCLUDE_DELETED_NO): array
+    public function findAll(?array $orderBy = [], int $includeDeleted = self::INCLUDE_DELETED_NO): array
     {
-        if (!$this->validateOrderBy($orderBy)) {
-            return [];
-        }
+        $this->validateOrderBy($orderBy);
 
         $qb = $this->createQueryBuilder(static::ENTITY_ALIAS);
         $this->handleIncludeDeleted($qb, $includeDeleted);
 
-        if (is_array($orderBy)) {
+        if (\is_array($orderBy)) {
             foreach ($orderBy as $field => $order) {
                 $qb->addOrderBy(sprintf("%s.%s", static::ENTITY_ALIAS, $field), $order);
             }
@@ -215,18 +202,17 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
 
     /**
      * Find entities by a set criteria.
-     * @param  array      $criteria       Associative list of fields to search by as "field" => value
-     * @param  array|null $orderBy        Associative list of fields to order by as "field" => "ASC"|"DESC"
-     * @param  int|null   $limit          Limit number of results
-     * @param  int|null   $offset         Start from this row index
-     * @param  int|null   $includeDeleted Include soft-deleted entities
-     * @return array                      Matched entities
+     * @param  array<string, mixed>       $criteria       Associative list of fields to search by as "field" => value
+     * @param  array<string, string>|null $orderBy        Associative list of fields to order by as "field" => "ASC"|"DESC"
+     * @param  int|null                   $limit          Limit number of results
+     * @param  int|null                   $offset         Start from this row index
+     * @param  int                        $includeDeleted Include soft-deleted entities
+     * @return array<object>                              Matched entities
      */
-    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null, ?int $includeDeleted = self::INCLUDE_DELETED_NO): array
+    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null, int $includeDeleted = self::INCLUDE_DELETED_NO): array
     {
-        if (!$this->validateCriteria($criteria) || !$this->validateOrderBy($orderBy)) {
-            return [];
-        }
+        $this->validateCriteria($criteria);
+        $this->validateOrderBy($orderBy);
 
         // These are not type hinted to remain compatible with Doctrine's function.
         $limit  = intval($limit);
@@ -235,7 +221,7 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder(static::ENTITY_ALIAS);
         $this->handleIncludeDeleted($qb, $includeDeleted);
 
-        if (is_array($criteria)) {
+        if (\is_array($criteria)) {
             foreach ($criteria as $field => $value) {
                 $qb
                     ->andWhere(sprintf("%s.%s = :%s", static::ENTITY_ALIAS, $field, $field))
@@ -244,7 +230,7 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
             }
         }
 
-        if (is_array($orderBy)) {
+        if (\is_array($orderBy)) {
             foreach ($orderBy as $field => $order) {
                 $qb->addOrderBy(sprintf("%s.%s", static::ENTITY_ALIAS, $field), $order);
             }
@@ -255,21 +241,20 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
 
     /**
      * Find an entity by a set criteria.
-     * @param  array       $criteria       Associative list of fields to search by as "field" => value
-     * @param  array|null  $orderBy        Associative list of fields to order by as "field" => "ASC"|"DESC"
-     * @param  int|null    $includeDeleted Include soft-deleted entities (0 = false, 1 = true, 2 = exclusive)
-     * @return object|null                 Matched entity, or null if not found
+     * @param  array<string, mixed>       $criteria       Associative list of fields to search by as "field" => value
+     * @param  array<string, string>|null $orderBy        Associative list of fields to order by as "field" => "ASC"|"DESC"
+     * @param  int                        $includeDeleted Include soft-deleted entities (0 = false, 1 = true, 2 = exclusive)
+     * @return T|null                                     Matched entity, or null if not found
      */
-    public function findOneBy(array $criteria, ?array $orderBy = null, ?int $includeDeleted = self::INCLUDE_DELETED_NO): ?object
+    public function findOneBy(array $criteria, ?array $orderBy = null, int $includeDeleted = self::INCLUDE_DELETED_NO)
     {
-        if (!$this->validateCriteria($criteria) || !$this->validateOrderBy($orderBy)) {
-            return null;
-        }
+        $this->validateCriteria($criteria);
+        $this->validateOrderBy($orderBy);
 
         $qb = $this->createQueryBuilder(static::ENTITY_ALIAS);
         $this->handleIncludeDeleted($qb, $includeDeleted);
 
-        if (is_array($criteria)) {
+        if (\is_array($criteria)) {
             foreach ($criteria as $field => $value) {
                 $qb
                     ->andWhere(sprintf("%s.%s = :%s", static::ENTITY_ALIAS, $field, $field))
@@ -278,7 +263,7 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
             }
         }
 
-        if (is_array($orderBy)) {
+        if (\is_array($orderBy)) {
             foreach ($orderBy as $field => $order) {
                 $qb->addOrderBy(sprintf("%s.%s", static::ENTITY_ALIAS, $field), $order);
             }
@@ -293,11 +278,11 @@ abstract class BaseEntityRepository extends ServiceEntityRepository
 
     /**
      * Find an entity by a set criteria.
-     * @param  Criteria   $criteria       Instance of a Doctrine search criteria
-     * @param  int|null   $includeDeleted Include soft-deleted entities
-     * @return Collection                 Matched entities
+     * @param  Criteria           $criteria       Instance of a Doctrine search criteria
+     * @param  int                $includeDeleted Include soft-deleted entities
+     * @return Collection<int, T>                 Matched entities
      */
-    public function matching(Criteria $criteria, ?int $includeDeleted = self::INCLUDE_DELETED_NO): Collection
+    public function matching(Criteria $criteria, int $includeDeleted = self::INCLUDE_DELETED_NO): Collection
     {
         // Pass through to the standard Doctrine function
         $matches = parent::matching($criteria);
