@@ -36,7 +36,7 @@ class User extends BaseEntity implements \Serializable, UserInterface, Equatable
      * @Assert\Type(type="string")
      * @Assert\Length(min=1, max=200)
      */
-    protected $username;
+    protected $username = "";
 
     /**
      * @var string|null
@@ -227,6 +227,12 @@ class User extends BaseEntity implements \Serializable, UserInterface, Equatable
     public function eraseCredentials()
     {
         $this->password = null;
+    }
+
+    /** {@inheritdoc} */
+    public function getUserIdentifier(): string
+    {
+        return $this->getUsername();
     }
 
 
