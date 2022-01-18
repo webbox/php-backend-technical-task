@@ -1,4 +1,7 @@
 {
+    "austinsmorris/doctrine-dbal-datetimeutc": {
+        "version": "2.0.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -135,6 +138,9 @@
     },
     "phpstan/phpstan": {
         "version": "0.12.85"
+    },
+    "phpstan/phpstan-deprecation-rules": {
+        "version": "0.12.6"
     },
     "phpstan/phpstan-symfony": {
         "version": "0.12.32"
