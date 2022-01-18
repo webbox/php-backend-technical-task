@@ -23,6 +23,9 @@
     "doctrine/common": {
         "version": "3.1.2"
     },
+    "doctrine/data-fixtures": {
+        "version": "1.5.1"
+    },
     "doctrine/dbal": {
         "version": "2.13.1"
     },
@@ -43,6 +46,18 @@
             "config/packages/test/doctrine.yaml",
             "src/Entity/.gitignore",
             "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "1f5514cfa15b947298df4d771e694e578d4c204d"
+        },
+        "files": [
+            "src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -94,8 +109,17 @@
     "monolog/monolog": {
         "version": "2.2.0"
     },
+    "myclabs/deep-copy": {
+        "version": "1.10.2"
+    },
     "nikic/php-parser": {
         "version": "v4.10.5"
+    },
+    "phar-io/manifest": {
+        "version": "2.0.3"
+    },
+    "phar-io/version": {
+        "version": "3.1.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -106,11 +130,43 @@
     "phpdocumentor/type-resolver": {
         "version": "1.4.0"
     },
+    "phpspec/prophecy": {
+        "version": "v1.15.0"
+    },
     "phpstan/phpstan": {
         "version": "0.12.85"
     },
     "phpstan/phpstan-symfony": {
         "version": "0.12.32"
+    },
+    "phpunit/php-code-coverage": {
+        "version": "9.2.10"
+    },
+    "phpunit/php-file-iterator": {
+        "version": "3.0.6"
+    },
+    "phpunit/php-invoker": {
+        "version": "3.1.1"
+    },
+    "phpunit/php-text-template": {
+        "version": "2.0.4"
+    },
+    "phpunit/php-timer": {
+        "version": "5.0.3"
+    },
+    "phpunit/phpunit": {
+        "version": "9.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "9.3",
+            "ref": "a6249a6c4392e9169b87abf93225f7f9f59025e6"
+        },
+        "files": [
+            ".env.test",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
     },
     "psr/cache": {
         "version": "2.0.0"
@@ -126,6 +182,57 @@
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "roave/security-advisories": {
+        "version": "dev-latest"
+    },
+    "sebastian/cli-parser": {
+        "version": "1.0.1"
+    },
+    "sebastian/code-unit": {
+        "version": "1.0.8"
+    },
+    "sebastian/code-unit-reverse-lookup": {
+        "version": "2.0.3"
+    },
+    "sebastian/comparator": {
+        "version": "4.0.6"
+    },
+    "sebastian/complexity": {
+        "version": "2.0.2"
+    },
+    "sebastian/diff": {
+        "version": "4.0.4"
+    },
+    "sebastian/environment": {
+        "version": "5.1.3"
+    },
+    "sebastian/exporter": {
+        "version": "4.0.4"
+    },
+    "sebastian/global-state": {
+        "version": "5.0.3"
+    },
+    "sebastian/lines-of-code": {
+        "version": "1.0.3"
+    },
+    "sebastian/object-enumerator": {
+        "version": "4.0.4"
+    },
+    "sebastian/object-reflector": {
+        "version": "2.0.4"
+    },
+    "sebastian/recursion-context": {
+        "version": "4.0.4"
+    },
+    "sebastian/resource-operations": {
+        "version": "3.0.3"
+    },
+    "sebastian/type": {
+        "version": "2.3.4"
+    },
+    "sebastian/version": {
+        "version": "3.0.2"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -384,9 +491,6 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.22.1"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.22.1"
-    },
     "symfony/polyfill-php74": {
         "version": "v1.22.1"
     },
@@ -472,6 +576,9 @@
     },
     "symfony/test-pack": {
         "version": "v1.0.7"
+    },
+    "symfony/thanks": {
+        "version": "v1.2.10"
     },
     "symfony/translation": {
         "version": "3.3",
@@ -573,8 +680,14 @@
     "symfony/yaml": {
         "version": "v5.2.7"
     },
+    "theseer/tokenizer": {
+        "version": "1.2.1"
+    },
     "twig/extra-bundle": {
         "version": "v3.3.0"
+    },
+    "twig/markdown-extra": {
+        "version": "v3.3.5"
     },
     "twig/twig": {
         "version": "v3.3.0"
