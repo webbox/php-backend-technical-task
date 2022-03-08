@@ -19,7 +19,7 @@
         "popper.js": "^1.16.1",
         "sass": "^1.48.0",
         "sass-loader": "^12.4.0",
-        "sprintf": "^0.1.5",
+        "sprintf-js": "^1.1.2",
         "stimulus": "^3.0.1",
         "sweetalert2": "^11.3.6",
         "ts-loader": "^9.2.6",
