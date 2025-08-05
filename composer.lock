@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc7c720b3af1bb5f703eaf1402b79fee",
+    "content-hash": "2281ce9c23aa0db47fe8846a8a8aeed6",
     "packages": [
         {
             "name": "austinsmorris/doctrine-dbal-datetimeutc",

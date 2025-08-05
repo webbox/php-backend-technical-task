@@ -50,7 +50,7 @@
         "symfony/yaml": "*",
         "twig/extra-bundle": "^3.3",
         "twig/markdown-extra": "^3.3",
-        "twig/twig": "^3.3",
+        "twig/twig": "^3.14",
         "willdurand/js-translation-bundle": "^4.0"
     },
     "require-dev": {
