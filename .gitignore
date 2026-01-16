@@ -17,8 +17,10 @@
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/webpack-encore-bundle ###
+/.yarn/
 /node_modules/
 /public/build/
+/.pnp.*
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
